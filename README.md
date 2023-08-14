@@ -2,8 +2,8 @@
 Learning Pygame
 
 
-checkout youtube tutorials from kaarin gaming, Ryisnow, Clear Code 
-to understand gaming mechnanics and how different libraries are used 
+checkout youtube tutorials from kaarin gaming, Ryisnow, Clear Code \n
+to understand gaming mechnanics and how different libraries are used \n
 to achieve the effects and mechanisms of 2D games. this is a simple platformer
 made after watching the mario-platformer tutorial by Clear Code(link below)
 
