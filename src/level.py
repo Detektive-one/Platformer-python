@@ -16,6 +16,12 @@ class Level:
 		# dust 
 		self.dust_sprite = pygame.sprite.GroupSingle()
 		self.player_on_ground = False
+		self.gameOn = True
+
+		#over
+		self.game_over_delay = 600  
+		self.game_over_triggered_time = None
+        
 
 	def create_jump_particles(self,pos):
 		if self.player.sprite.facing_right:
@@ -57,6 +63,9 @@ class Level:
 					self.player.add(player_sprite)
 				if cell == 'D':
 					tile = Tile((x,y),tile_size, 'grey')
+					self.tiles.add(tile)
+				if cell == 'E':
+					tile = Tile((x,y),tile_size, 'blue')
 					self.tiles.add(tile)
 
 	def scroll_x(self):
@@ -107,7 +116,9 @@ class Level:
 					player.on_ground = True
 
 					if tile.get_color() == 'grey':
-						player.live = False						
+						player.live = False		
+						self.gameOn = False		
+						self.game_over_triggered_time = pygame.time.get_ticks()		
 					else:
 						player.live = True
 				elif player.direction.y < 0:
@@ -115,6 +126,18 @@ class Level:
 					player.direction.y = 0
 					player.on_ceiling = True
 
+	def gameOver(self):
+		
+		font1 = pygame.font.SysFont('Lucida Sans' , 40)
+		font2 = pygame.font.SysFont('Lucida Sans' , 30)
+		x = 490
+		y = 300
+		img = font1.render('Game Over', True, 'blue')
+		img2 = font2.render('Press Enter to restart', True, 'blue')
+		self.display_surface.blit(img, (x,y))
+		self.display_surface.blit(img2, (x-50,y+100))
+
+	
 	def run(self):
 		# dust particles 
 		self.dust_sprite.update(self.world_shift)
@@ -125,11 +148,26 @@ class Level:
 		self.tiles.draw(self.display_surface)
 		self.scroll_x()
 
+		current_time = pygame.time.get_ticks()
 
 		# player
-		self.player.update()
-		self.horizontal_movement_collision()
-		self.get_player_on_ground()
-		self.vertical_movement_collision()
-		self.create_landing_dust()
-		self.player.draw(self.display_surface)
+		
+		if self.gameOn:
+			self.player.update()
+			self.horizontal_movement_collision()
+			self.get_player_on_ground()
+			self.vertical_movement_collision()
+			self.create_landing_dust()
+			self.player.draw(self.display_surface)
+		else:
+			if current_time - self.game_over_triggered_time < self.game_over_delay:
+				self.player.update()
+				self.player.draw(self.display_surface)
+			# if current_time - self.game_over_triggered_time > self.game_over_delay:
+			else:				
+				self.gameOver()
+
+				return True
+				
+                
+            
