@@ -50,11 +50,14 @@ class Level:
 				y = row_index * tile_size
 				
 				if cell == 'X':
-					tile = Tile((x,y),tile_size)
+					tile = Tile((x,y),tile_size, 'brown')
 					self.tiles.add(tile)
 				if cell == 'P':
 					player_sprite = Player((x,y),self.display_surface,self.create_jump_particles)
 					self.player.add(player_sprite)
+				if cell == 'D':
+					tile = Tile((x,y),tile_size, 'grey')
+					self.tiles.add(tile)
 
 	def scroll_x(self):
 		player = self.player.sprite
@@ -91,25 +94,26 @@ class Level:
 		if player.on_right and (player.rect.right > self.current_x or player.direction.x <= 0):
 			player.on_right = False
 
+
 	def vertical_movement_collision(self):
 		player = self.player.sprite
 		player.apply_gravity()
 
-		for sprite in self.tiles.sprites():
-			if sprite.rect.colliderect(player.rect):
+		for tile in self.tiles.sprites():
+			if tile.rect.colliderect(player.rect):
 				if player.direction.y > 0: 
-					player.rect.bottom = sprite.rect.top
+					player.rect.bottom = tile.rect.top
 					player.direction.y = 0
 					player.on_ground = True
+
+					if tile.get_color() == 'grey':
+						player.live = False						
+					else:
+						player.live = True
 				elif player.direction.y < 0:
-					player.rect.top = sprite.rect.bottom
+					player.rect.top = tile.rect.bottom
 					player.direction.y = 0
 					player.on_ceiling = True
-
-		if player.on_ground and player.direction.y < 0 or player.direction.y > 1:
-			player.on_ground = False
-		if player.on_ceiling and player.direction.y > 0.1:
-			player.on_ceiling = False
 
 	def run(self):
 		# dust particles 

@@ -33,10 +33,11 @@ class Player(pygame.sprite.Sprite):
 		self.attack = False
 		self.attack_cooldown = 800
 		self.attack_time = None
+		self.live = True
 
 	def import_character_assets(self):
 		character_path = '../graphics/character/'
-		self.animations = {'idle':[],'run':[],'jump':[],'fall':[], 'attack':[]}
+		self.animations = {'idle':[],'run':[],'jump':[],'fall':[], 'attack':[], 'dead':[]}
 
 		for animation in self.animations.keys():
 			full_path = character_path + animation
@@ -116,6 +117,9 @@ class Player(pygame.sprite.Sprite):
 		if self.attack:
 			if current_time - self.attack_time > self.attack_cooldown:
 				self.attack = False
+				
+
+		
 
 	def get_status(self):
 		if self.direction.y < 0:
@@ -124,6 +128,8 @@ class Player(pygame.sprite.Sprite):
 			self.status = 'fall'
 		elif self.attack:
 				self.status = 'attack'
+		elif not self.live:
+			self.status = 'dead'
 		else:
 			if self.direction.x != 0:
 				self.status = 'run'
@@ -144,4 +150,5 @@ class Player(pygame.sprite.Sprite):
 		self.get_status()
 		self.animate()
 		self.run_dust_animation()
+		
 		

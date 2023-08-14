@@ -8,8 +8,8 @@ level_map = [
     ' XXXX       XX                    X             XXX                XX  ',
     ' XX    X  XXXX    XX  XX     X          X  X   XX       XX  XXX       X',
     'X      X  XXXX    X   XXX    X  X  X     X  X  X   XXX            X   X',
-    'X   XXXXX XXXXXX  XX  XXXX    XXXXXXXXXXX  XXXXXXXXXXXX  XX    XXXX   X ',
-    'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+    'X   XXXXX XXXXXX  XX  XXXX    XXXXXXXXXXX  XXXXXXXXXXXX  XX    XXXX   X',
+    'DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD'
 ]
 
 
