@@ -21,6 +21,7 @@ class Level:
 		#over
 		self.game_over_delay = 600  
 		self.game_over_triggered_time = None
+		self.end = False
         
 
 	def create_jump_particles(self,pos):
@@ -46,42 +47,70 @@ class Level:
 			fall_dust_particle = ParticleEffect(self.player.sprite.rect.midbottom - offset,'land')
 			self.dust_sprite.add(fall_dust_particle)
 
-	def setup_level(self,layout):
+	# def setup_level(self, layout):
+	# 	self.tiles = pygame.sprite.Group()
+	# 	self.player = pygame.sprite.GroupSingle()
+
+	# 	# Create a larger map by repeating the original layout horizontally
+	# 	repeated_layout = [row * 2 for row in layout]
+
+	# 	for row_index, row in enumerate(repeated_layout):
+	# 		for col_index, cell in enumerate(row):
+	# 			x = col_index * tile_size
+	# 			y = row_index * tile_size
+
+	# 			if cell == 'X':
+	# 				tile = Tile((x, y), tile_size, 'brown')
+	# 				self.tiles.add(tile)
+	# 			if cell == 'P':
+	# 				player_sprite = Player((x, y), self.display_surface, self.create_jump_particles)
+	# 				self.player.add(player_sprite)
+	# 			if cell == 'D':
+	# 				tile = Tile((x, y), tile_size, 'grey')
+	# 				self.tiles.add(tile)
+	# 	pygame.display.flip()
+	def setup_level(self, layout):
+		
 		self.tiles = pygame.sprite.Group()
 		self.player = pygame.sprite.GroupSingle()
 
-		for row_index,row in enumerate(layout):
-			for col_index,cell in enumerate(row):
+		for row_index, row in enumerate(layout):
+			for col_index, cell in enumerate(row):
 				x = col_index * tile_size
 				y = row_index * tile_size
 				
 				if cell == 'X':
-					tile = Tile((x,y),tile_size, 'brown')
+					tile = Tile((x, y), tile_size, 'brown')
 					self.tiles.add(tile)
 				if cell == 'P':
-					player_sprite = Player((x,y),self.display_surface,self.create_jump_particles)
+					player_sprite = Player((x, y), self.display_surface, self.create_jump_particles)
 					self.player.add(player_sprite)
 				if cell == 'D':
-					tile = Tile((x,y),tile_size, 'grey')
-					self.tiles.add(tile)
-				if cell == 'E':
-					tile = Tile((x,y),tile_size, 'blue')
+					tile = Tile((x, y), tile_size, 'grey')
 					self.tiles.add(tile)
 
-	def scroll_x(self):
-		player = self.player.sprite
-		player_x = player.rect.centerx
-		direction_x = player.direction.x
+				# Offset the x-coordinate to render the second map side by side
+				x += len(row) * tile_size
+				if cell == 'X':
+					tile = Tile((x, y), tile_size, 'brown')
+					self.tiles.add(tile)
+				if cell == 'D':
+					tile = Tile((x, y), tile_size, 'grey')
+					self.tiles.add(tile)
+	# def scroll_x(self):
+	# 	player = self.player.sprite
+	# 	player_x = player.rect.centerx
+	# 	direction_x = player.direction.x
 
-		if player_x < screen_width / 4 and direction_x < 0:
-			self.world_shift = 8
-			player.speed = 0
-		elif player_x > screen_width - (screen_width / 4) and direction_x > 0:
-			self.world_shift = -8
-			player.speed = 0
-		else:
-			self.world_shift = 0
-			player.speed = 8
+	# 	if player_x < screen_width / 4 and direction_x < 0:
+	# 		self.world_shift = 8
+	# 		player.speed = 0
+	# 	elif player_x > screen_width - (screen_width / 4) and direction_x > 0:
+	# 		self.world_shift = -8
+	# 		player.speed = 0
+	# 	else:
+	# 		self.world_shift = 0
+	# 		player.speed = 8
 
 	def horizontal_movement_collision(self):
 		player = self.player.sprite
@@ -139,14 +168,16 @@ class Level:
 
 	
 	def run(self):
+		
 		# dust particles 
-		self.dust_sprite.update(self.world_shift)
+		self.dust_sprite.update(-5)
 		self.dust_sprite.draw(self.display_surface)
-
+		
 		# level tiles
-		self.tiles.update(self.world_shift)
+		self.tiles.update(-5)
 		self.tiles.draw(self.display_surface)
-		self.scroll_x()
+		# self.scroll_x()
+			
 
 		current_time = pygame.time.get_ticks()
 

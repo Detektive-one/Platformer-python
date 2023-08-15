@@ -19,9 +19,9 @@ class Player(pygame.sprite.Sprite):
 
 		# player movement
 		self.direction = pygame.math.Vector2(0,0)
-		self.speed = 8
+		self.speed = 2
 		self.gravity = 0.8
-		self.jump_speed = -16
+		self.jump_speed = -7
 
 		# player status
 		self.status = 'idle'
@@ -91,8 +91,7 @@ class Player(pygame.sprite.Sprite):
 				flipped_dust_particle = pygame.transform.flip(dust_particle,True,False)
 				self.display_surface.blit(flipped_dust_particle,pos)
 
-	def isAlive(self):
-		return self.live
+
 	
 	def get_input(self):
 		keys = pygame.key.get_pressed()

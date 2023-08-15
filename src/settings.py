@@ -1,15 +1,15 @@
 level_map = [ 
-    'X                                                                     X',
-    'X                                      XXX                            X',
-    'X                                                                     X',
-    ' XX    XXX            XX      XXXXXX       XXXXXXXX           XX      X',
-    ' XX P                                X                XX              X',
-    ' XXXX         XX         XX           X                     XXX       X',
+    '                                                                       ',
+    '                                       XXX                             ',
+    '                                                                       ',
+    '       XXX            XX      XXXXXX       XXXXXXXX           XX       ',
+    ' XX P                                X                XX               ',
+    ' XXXX         XX         XX           X                     XXX        ',
     ' XXXX       XX                    X             XXX                XX  ',
-    ' XX    X  XXXX    XX  XX     X          X  X   XX       XX  XXX       X',
-    'X      X  XXXX    X   XXX    X  X  X     X  X  X   XXX            X   X',
-    'X   XXXXX XXXXXX  XX  XXXX    XXXXXXXXXXX  XXXXXXXXXXXX  XX    XXXX   X',
-    'DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDE'
+    ' XX    X  XXXX    XX  XX     X          X  X   XX       XX  XXX        ',
+    '       X  XXXX    X   XXX    X  X  X     X  X  X   XXX            X    ',
+    '    XXXXX XXXXXX  XX  XXXX    XXXXXXXXXXX  XXXXXXXXXXXX  XX    XXXX    ',
+    'DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDS'
 ]
 
 
